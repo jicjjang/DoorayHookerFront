@@ -1,23 +1,36 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
+  <div class="container">
+    <app-header></app-header>
+    <hr>
     <router-view></router-view>
+    <hr>
+    <app-footer></app-footer>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
+import Header from './components/decorator/Header.vue'
+import Footer from './components/decorator/Footer.vue'
+
 export default {
-  name: 'app'
+  components: {
+    appHeader: Header,
+    appFooter: Footer
+  },
+  methods: {
+    ...mapActions({
+      saveData: 'saveData'
+    })
+  },
+  created () {
+    this.$http.get('data.json').then(res => {
+      this.saveData(res.body)
+    })
+  }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>

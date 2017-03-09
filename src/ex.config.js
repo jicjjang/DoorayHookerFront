@@ -1,0 +1,1 @@
+export const FIREBASE_URL = 'FIREBASE_URL'
