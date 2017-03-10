@@ -1,25 +1,36 @@
+import Vue from 'vue'
+
 const state = {
-  schedule: []
+  schedule: null
 }
 
 const getters = {
-  schedulList () {
+  scheduleList () {
     return state.schedule
-  },
-  schedule (state) {
-    return state.schedule[0]
   }
 }
 
 const mutations = {
-  'SAVE_DATA' (state, data) {
+  'INIT_DATA' (state, data) {
     state.schedule = data
+  },
+  'SAVE_DATA' (state, data) {
+    state.schedule[data.name] = data.parsedData
   }
 }
 
 const actions = {
+  initData ({ commit }) {
+    Vue.http.get('data.json').then(res => {
+      state.schedule = res.body
+      commit('INIT_DATA', res.body)
+    })
+  },
   saveData ({ commit }, data) {
-    commit('SAVE_DATA', data)
+    const parsedData = JSON.parse(data)
+    Vue.http.post(`data.json`, parsedData).then(res => {
+      commit('SAVE_DATA', {name: res.body.name, parsedData})
+    })
   }
 }
 

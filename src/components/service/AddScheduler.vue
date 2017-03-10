@@ -2,34 +2,42 @@
   <div class="col-xs-12 col-sm-4 col-md-4">
     <h1>Add Scheduler</h1>
     <div class="form-group">
-      <label>Project Id</label>
-      <textarea class="form-control" type="text">"hookType": "dooray-message",
-"hookId": "HOOK_URL",
-"image": "ICON_IMAGE_URL",
-"time": "18:30"
-"name": "GoHomeBot",
-"data" : {
-	"text": "WeAreGoToHomeNow!",
-	"attachments": [{
-    "title": "SUBJECT",
-    "titleLink": "LINK",
-    "text": "CONTEXT",
-    "color": "blue"
-  }]
-}</textarea>
-<button class="btn btn-primary" @click="submit">Submit</button>
+      <textarea class="form-control" type="text" v-model="schedule"></textarea>
+      <button class="btn btn-primary" @click="saveData(schedule)">Submit</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  props: ['saveData'],
+  data: () => {
+    return {
+      schedule: `{
+    "hookType": "dooray-message",
+    "id": "HOOK_URL",
+    "description": "설명",
+    "image": "ICON_IMAGE_URL",
+    "hookTime": "18:30",
+    "name": "GoHomeBot",
+    "data" : {
+        "text": "WeAreGoToHomeNow!",
+        "attachments": [{
+            "title": "SUBJECT",
+            "titleLink": "LINK",
+            "text": "CONTEXT",
+            "color": "blue"
+        }]
+    }
+}`
+    }
+  }
 }
 </script>
 
 <style scoped>
   textarea {
-    height: 120px;
+    height: 360px;
   }
 
   button {

@@ -20,14 +20,12 @@ export default {
     appFooter: Footer
   },
   methods: {
-    ...mapActions({
-      saveData: 'saveData'
-    })
+    ...mapActions([
+      'initData'
+    ])
   },
   created () {
-    this.$http.get('data.json').then(res => {
-      this.saveData(res.body)
-    })
+    this.initData()
   }
 }
 </script>
