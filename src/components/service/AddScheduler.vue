@@ -9,8 +9,9 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
-  props: ['saveData'],
   data: () => {
     return {
       schedule: `{
@@ -31,6 +32,11 @@ export default {
     }
 }`
     }
+  },
+  methods: {
+    ...mapActions([
+      'saveData'
+    ])
   }
 }
 </script>
