@@ -1,5 +1,9 @@
 <template>
-  <li class="list-group-item" >
+  <li class="list-group-item"
+      @mouseenter="isActive = true"
+      @mouseleave="isActive = false"
+      @click="moveDetailPage"
+      :class="{ active: isActive }">
     <h4>Bot Description : {{ schedule.description }}</h4>
     <hr>
     <h4>Bot Name : '{{ schedule.name }}'</h4>
@@ -10,9 +14,22 @@
 
 <script>
 export default {
-  props: ['schedule']
+  props: ['schedule'],
+  data: () => {
+    return {
+      isActive: false
+    }
+  },
+  methods: {
+    moveDetailPage (event) {
+      console.log(event)
+    }
+  }
 }
 </script>
 
-<style lang="css">
+<style scoped>
+  .mouseoverData {
+
+  }
 </style>

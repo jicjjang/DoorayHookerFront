@@ -16,13 +16,15 @@ const mutations = {
   },
   'SAVE_DATA' (state, data) {
     Vue.set(state.schedule, data.name, data.parsedData)
+  },
+  'REMOVE_DATA' (state, key) {
+    Vue.delete(state.schedule, key)
   }
 }
 
 const actions = {
   initData: ({ commit }) => {
     Vue.http.get('data.json').then(res => {
-      console.log(res.body)
       commit('INIT_DATA', res.body)
     })
   },
@@ -30,6 +32,11 @@ const actions = {
     const parsedData = JSON.parse(data)
     Vue.http.post(`data.json`, parsedData).then(res => {
       commit('SAVE_DATA', {name: res.body.name, parsedData})
+    })
+  },
+  removeData: ({ commit }, key) => {
+    Vue.http.delete(`data/${key}.json`).then(res => {
+      commit('REMOVE_DATA', key)
     })
   }
 }
