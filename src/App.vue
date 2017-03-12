@@ -33,6 +33,16 @@ export default {
 </script>
 
 <style>
+  hr {
+    float: left;
+    width: 100%;
+  }
+  hr::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
   .slide-enter-active {
     animation: slide-in 200ms ease-out forwards;
   }

@@ -43,7 +43,7 @@ export default {
 
 <style scoped>
   textarea {
-    height: 360px;
+    height: 320px;
   }
 
   button {

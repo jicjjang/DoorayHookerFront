@@ -15,7 +15,7 @@ Vue.use(VueResource)
 
 Vue.http.options.root = FIREBASE_URL
 
-const router = new VueRouter({
+export const router = new VueRouter({
   routes,
   mode: 'history',  // default mode hash => default push state
   scrollBehavior (to, from, savedPosition) {

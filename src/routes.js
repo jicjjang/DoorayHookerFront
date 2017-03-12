@@ -11,31 +11,47 @@ export const routes = [
     }
   },
   {
-    path: '/scheduler',
-    // components: {
-    //   default: User,
-    //   'header-bottom': Header
-    // },
-    children: [
-      // {
-      //   path: '',
-      //   component: UserStart
-      // },
-      {
-        path: ':id',
-        component: SchedulerDetail,
-        beforeEnter: (to, from, next) => {  // router에서의 middleware
-          console.log('routes in "beforeEnter"')
-          next()
-        }
-      },
-      {
-        path: ':id/edit',
-        component: SchedulerEdit,
-        name: 'userEdit'
-      }
-    ]
+    path: '/scheduler/:id',
+    component: SchedulerDetail,
+    name: 'user',
+    beforeEnter: (to, from, next) => {  // router에서의 middleware
+      next()
+    }
   },
+  {
+    path: '/scheduler/:id/edit',
+    component: SchedulerEdit,
+    name: 'userEdit',
+    beforeEnter: (to, from, next) => {  // router에서의 middleware
+      next()
+    }
+  },
+  // {
+  //   path: '/scheduler',
+  //   // components: {
+  //   //   default: User,
+  //   //   'header-bottom': Header
+  //   // },
+  //   children: [
+  //     // {
+  //     //   path: '',
+  //     //   component: UserStart
+  //     // },
+  //     {
+  //       path: ':id',
+  //       component: SchedulerDetail,
+  //       beforeEnter: (to, from, next) => {  // router에서의 middleware
+  //         console.log('routes in "beforeEnter"')
+  //         next()
+  //       }
+  //     },
+  //     {
+  //       path: ':id/edit',
+  //       component: SchedulerEdit,
+  //       name: 'userEdit'
+  //     }
+  //   ]
+  // },
   {
     path: '/redirect-me',
     // redirect: '/user'
