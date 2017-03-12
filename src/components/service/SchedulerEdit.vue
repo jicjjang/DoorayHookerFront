@@ -1,8 +1,7 @@
 <template>
   <div class="col-xs-12" v-if="schedule">
-    {{ schedule }}
     <textarea class="form-control" type="text" v-model="schedule"></textarea>
-    <button class="btn btn-danger" @click="modifyData({key: $route.params.id, schedule})">Save</button>
+    <button class="btn btn-danger" @click="checkSave">Save</button>
     <router-link :to="`/scheduler/${$route.params.id}`" class="btn btn-primary" tag="button">Cancel</router-link>
   </div>
 </template>
@@ -24,14 +23,13 @@ export default {
       this.$http.get(`data/${key}.json`).then(res => {
         this.schedule = JSON.stringify(res.body)
       })
+    },
+    checkSave () {
+      if (confirm('Really Save?')) {
+        console.log(this.schedule)
+        this.modifyData({key: this.$route.params.id, schedule: this.schedule})
+      }
     }
-    // ,
-    // checkSave () {
-    //   if (confirm('Really Save?')) {
-    //     console.log(this.schedule)
-    //     this.modifyData(this.$route.params.id, this.schedule)
-    //   }
-    // }
   },
   created () {
     this.getData(this.$route.params.id)
@@ -41,6 +39,10 @@ export default {
 
 <style scoped>
   textarea {
-    height: 50px;
+    height: 200px;
+  }
+
+  button {
+    margin: 10px 0 0 0;
   }
 </style>
