@@ -7,7 +7,8 @@
     <h4>Bot Name : '{{ schedule.name }}'</h4>
     <h4>Bot Type : '{{ schedule.hookType }}'</h4>
     <h4>Start Time : {{ schedule.hookTime }}</h4>
-    <h4>Term : {{ schedule.hookTerm }}분</h4>
+    <h4 v-if="schedule.hookTerm === '0' || schedule.hookTerm === '' || schedule.hookTerm == null">Term : 없음</h4>
+    <h4 v-else>Term : {{ schedule.hookTerm }}분</h4>
     <h4>Text : {{ schedule.data.text }}</h4>
     <hr>
     <!-- <span v-if="schedule.data">
