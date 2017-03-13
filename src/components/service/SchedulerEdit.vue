@@ -26,7 +26,6 @@ export default {
     },
     checkSave () {
       if (confirm('Really Save?')) {
-        console.log(this.schedule)
         this.modifyData({key: this.$route.params.id, schedule: this.schedule})
       }
     }

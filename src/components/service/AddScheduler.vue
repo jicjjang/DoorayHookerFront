@@ -50,19 +50,3 @@ export default {
     margin-top: 10px;
   }
 </style>
-
-<!-- {
-	"hookType": "dooray-message",
-	"hookId": "https://hook.dooray.com/services/1708537453772223384/1850576101103842819/tEthH-nMTbK8LUIg30k6Gg",
-	"image": "http://media02.hongkiat.com/danbo-photography/rainy-days.jpg",
-	"name": "how about korean?",
-	"data" : {
-		"text": "왜이래",
-		"attachments": [{
-	      "title": "title",
-	      "titleLink": "naver.com",
-	      "text": "text",
-	      "color": "blue"
-	    }]
-	}
-} -->
