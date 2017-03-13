@@ -18,6 +18,17 @@
       <input type="text" name="hookTime" placeholder="09:00" v-model="schedule.hookTime"/>
     </div>
     <div class="form-group">
+      <label for="hookTerm">Hook Term</label>
+      <select v-model="schedule.hookTerm" class="form-control">
+        <option value="0">없음</option>
+        <option value="5">5분</option>
+        <option value="10">10분</option>
+        <option value="15">15분</option>
+        <option value="30">30분</option>
+        <option value="60">60분</option>
+      </select>
+    </div>
+    <div class="form-group">
       <label for="name">Bot name</label>
       <input type="text" name="name" v-model="schedule.name">
     </div>
@@ -41,13 +52,14 @@ export default {
     return {
       schedule: {
         hookType: 'dooray-message',
-        id: 'url',
-        description: '테스트용봇입니당.',
-        image: '이미지 경로',
-        hookTime: '11:00',
-        name: '준석봇',
+        id: '',
+        description: '',
+        image: '',
+        hookTime: '',
+        hookTerm: '',
+        name: '',
         data: {
-          text: 'test'
+          text: ''
           // ,
           // attachments: [
           //   {
@@ -71,6 +83,7 @@ export default {
         this.schedule.description = res.body.description
         this.schedule.image = res.body.image
         this.schedule.hookTime = res.body.hookTime
+        this.schedule.hookTerm = res.body.hookTerm
         this.schedule.name = res.body.name
         this.schedule.data.text = res.body.data.text
       })

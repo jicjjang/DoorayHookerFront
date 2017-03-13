@@ -15,7 +15,19 @@
     </div>
     <div class="form-group">
       <label for="hookTime">Hook Time</label>
-      <input type="text" name="hookTime" v-model="schedule.hookTime"placeholder="09:00"/>
+      <input type="text" name="hookTime" v-model="schedule.hookTime" placeholder="09:00"/>
+    </div>
+    <div class="form-group">
+      <label for="hookTerm">Hook Term</label>
+      <!-- <input type="text" name="hookTerm" v-model="schedule.hookTerm" placeholder="주기"/> -->
+      <select v-model="schedule.hookTerm" class="form-control">
+        <option value="0">없음</option>
+        <option value="5">5분</option>
+        <option value="10">10분</option>
+        <option value="15">15분</option>
+        <option value="30">30분</option>
+        <option value="60">1시간</option>
+      </select>
     </div>
     <div class="form-group">
       <label for="name">Bot name</label>
@@ -44,6 +56,7 @@ export default {
         description: '',
         image: '',
         hookTime: '',
+        hookTerm: '',
         name: '',
         data: {
           text: ''

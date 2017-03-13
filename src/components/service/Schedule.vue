@@ -8,6 +8,8 @@
       <hr>
       <h4>Bot Name : '{{ schedule.name }}'</h4>
       <h4>Time : {{ schedule.hookTime }}</h4>
+      <h4 v-if="schedule.hookTerm === '0' || schedule.hookTerm === '' || schedule.hookTerm == null">Term : 없음</h4>
+      <h4 v-else>Term : {{ schedule.hookTerm }}분</h4>
     </router-link>
   </li>
 </template>

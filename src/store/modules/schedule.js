@@ -35,6 +35,7 @@ const actions = {
   saveData: ({ commit }, data) => {
     Vue.http.post(`data.json`, data).then(res => {
       commit('SAVE_DATA', {key: res.body.name, data})
+      router.go('/')
     })
   },
   removeData: ({ commit }, key) => {
