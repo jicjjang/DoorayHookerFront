@@ -2,7 +2,7 @@ import Vue from 'vue'
 import { router } from '../../main'
 
 const state = {
-  schedule: []
+  schedule: {}
 }
 
 const getters = {
@@ -16,7 +16,10 @@ const mutations = {
     state.schedule = datas
   },
   'SAVE_DATA' (state, data) {
-    Vue.set(state.schedule, data.key, data.parsedData)
+    if (!state.schedule) {
+      state.schedule = {}
+    }
+    Vue.set(state.schedule, data.key, data.data)
   },
   'REMOVE_DATA' (state, key) {
     Vue.delete(state.schedule, key)
@@ -30,9 +33,8 @@ const actions = {
     })
   },
   saveData: ({ commit }, data) => {
-    const parsedData = JSON.parse(data)
-    Vue.http.post(`data.json`, parsedData).then(res => {
-      commit('SAVE_DATA', {key: res.body.name, parsedData})
+    Vue.http.post(`data.json`, data).then(res => {
+      commit('SAVE_DATA', {key: res.body.name, data})
     })
   },
   removeData: ({ commit }, key) => {
@@ -42,9 +44,8 @@ const actions = {
     })
   },
   modifyData: ({ commit }, data) => {
-    const parsedData = JSON.parse(data.schedule)
-    Vue.http.put(`data/${data.key}.json`, parsedData).then(res => {
-      commit('SAVE_DATA', {key: data.key, parsedData})
+    Vue.http.put(`data/${data.key}.json`, data.data).then(res => {
+      commit('SAVE_DATA', {key: data.key, data: data.data})
       router.push(`/scheduler/${data.key}`)
     })
   }
