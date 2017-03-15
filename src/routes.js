@@ -1,6 +1,6 @@
-import SchedulerManager from './components/service/SchedulerManager.vue'
-import SchedulerDetail from './components/service/SchedulerDetail.vue'
-import SchedulerEdit from './components/service/SchedulerEdit.vue'
+import SchedulerManager from './components/service/schedule/SchedulerManager.vue'
+import SchedulerDetail from './components/service/schedule/SchedulerDetail.vue'
+import SchedulerEdit from './components/service/schedule/SchedulerEdit.vue'
 
 export const routes = [
   {

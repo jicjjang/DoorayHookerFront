@@ -32,7 +32,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   hr {
     float: left;
     width: 100%;
