@@ -10,6 +10,20 @@
       <input type="text" name="description" v-model="schedule.description" placeholder="봇에 대한 설명"/>
     </div>
     <div class="form-group">
+      <label for="hookType">Hook Type</label>
+      <select v-model="schedule.hookType" class="form-control">
+        <option value="dooray-message">Message</option>
+        <option value="dooray-menu">Menu</option>
+      </select>
+    </div>
+    <div class="form-group" v-if="schedule.hookType === 'dooray-menu'">
+      <label for="hookMenuType">Hook Menu Type</label>
+      <select v-model="schedule.hookMenuType" class="form-control">
+        <option value="lunch">Lunch</option>
+        <option value="dinner">Dinner</option>
+      </select>
+    </div>
+    <div class="form-group">
       <label for="imageUrl">Image Url</label>
       <input type="text" name="imageUrl" v-model="schedule.image" placeholder="봇 이미지 url"/>
     </div>
@@ -52,6 +66,7 @@ export default {
     return {
       schedule: {
         hookType: 'dooray-message',
+        hookMenuType: 'lunch',
         id: '',
         description: '',
         image: '',

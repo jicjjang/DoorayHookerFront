@@ -10,6 +10,20 @@
       <input type="text" name="description" v-model="schedule.description"/>
     </div>
     <div class="form-group">
+      <label for="hookType">Hook Type</label>
+      <select v-model="schedule.hookType" class="form-control">
+        <option value="dooray-message" :selected="schedule.hookType === 'dooray-message'">Message</option>
+        <option value="dooray-menu" :selected="schedule.hookType === 'dooray-menu'">Menu</option>
+      </select>
+    </div>
+    <div class="form-group" v-if="schedule.hookType === 'dooray-menu'">
+      <label for="hookMenuType">Hook Menu Type</label>
+      <select v-model="schedule.hookMenuType" class="form-control">
+        <option value="lunch">Lunch</option>
+        <option value="dinner">Dinner</option>
+      </select>
+    </div>
+    <div class="form-group">
       <label for="imageUrl">Image Url</label>
       <input type="text" name="imageUrl" v-model="schedule.image"/>
     </div>
@@ -52,6 +66,7 @@ export default {
     return {
       schedule: {
         hookType: 'dooray-message',
+        hookMenuType: 'lunch',
         id: '',
         description: '',
         image: '',
@@ -81,6 +96,8 @@ export default {
       this.$http.get(`data/${key}.json`).then(res => {
         this.schedule.id = res.body.id
         this.schedule.description = res.body.description
+        this.schedule.hookType = res.body.hookType
+        this.schedule.hookMenuType = res.body.hookMenuType
         this.schedule.image = res.body.image
         this.schedule.hookTime = res.body.hookTime
         this.schedule.hookTerm = res.body.hookTerm

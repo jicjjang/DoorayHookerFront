@@ -5,7 +5,8 @@
     <h4>ID (Url) : '{{ schedule.id }}'</h4>
     <h4>Image Url : '{{ schedule.image }}'</h4>
     <h4>Bot Name : '{{ schedule.name }}'</h4>
-    <h4>Bot Type : '{{ schedule.hookType }}'</h4>
+    <h4 v-if="schedule.hookType === 'dooray-message'">Bot Type : Message</h4>
+    <h4 v-else-if="schedule.hookType === 'dooray-menu'">Bot Type : Menu - {{ schedule.hookMenuType }}</h4>
     <h4>Start Time : {{ schedule.hookTime }}</h4>
     <h4 v-if="schedule.hookTerm === '0' || schedule.hookTerm === '' || schedule.hookTerm == null">Term : 없음</h4>
     <h4 v-else>Term : {{ schedule.hookTerm }}분</h4>
