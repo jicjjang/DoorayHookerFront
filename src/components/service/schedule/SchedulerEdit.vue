@@ -107,6 +107,7 @@ export default {
     },
     checkSave () {
       if (confirm('Really Save?')) {
+        this.schedule.image = decodeURIComponent(this.schedule.image)
         this.modifyData({key: this.$route.params.id, data: this.schedule})
       }
     }

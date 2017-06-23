@@ -98,6 +98,7 @@ export default {
       } else if (this.schedule.hookTime.length !== 5) {
         alert('시간은 02:00 같은 구조로 써주세요.')
       } else {
+        this.schedule.image = decodeURIComponent(this.schedule.image)
         this.saveData(this.schedule)
       }
     }
