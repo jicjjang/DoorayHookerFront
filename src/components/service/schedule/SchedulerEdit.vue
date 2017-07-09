@@ -14,6 +14,7 @@
       <select v-model="schedule.hookType" class="form-control">
         <option value="dooray-message" :selected="schedule.hookType === 'dooray-message'">Message</option>
         <option value="dooray-menu" :selected="schedule.hookType === 'dooray-menu'">Menu</option>
+        <option value="dooray-commit" :selected="schedule.hookType === 'dooray-commit'">Github Today Commit</option>
       </select>
     </div>
     <div class="form-group" v-if="schedule.hookType === 'dooray-menu'">
@@ -23,9 +24,21 @@
         <option value="dinner">Dinner</option>
       </select>
     </div>
+    <div class="form-group" v-if="schedule.hookType === 'dooray-commit'">
+      <label for="githubIds">Github Ids</label>
+      <input type="text" name="githubIds" v-model="schedule.githubIds" placeholder="jicjjang, godori, ..."/>
+    </div>
+    <div class="form-group" v-if="schedule.hookType === 'dooray-commit'">
+      <label for="text">Message for committers</label>
+      <input type="text" name="text" v-model="schedule.data.committer" placeholder="Good job!">
+    </div>
+    <div class="form-group" v-if="schedule.hookType === 'dooray-commit'">
+      <label for="text">Message for none committers</label>
+      <input type="text" name="text" v-model="schedule.data.nonecommitter" placeholder="cheer up...">
+    </div>
     <div class="form-group">
       <label for="imageUrl">Image Url</label>
-      <input type="text" name="imageUrl" v-model="schedule.image"/>
+      <input type="text" name="imageUrl" v-model="schedule.image" placeholder="봇 이미지 url"/>
     </div>
     <div class="form-group">
       <label for="hookTime">Hook Time</label>
@@ -69,12 +82,15 @@ export default {
         hookMenuType: 'lunch',
         id: '',
         description: '',
+        githubIds: '',
         image: '',
         hookTime: '',
         hookTerm: '',
         name: '',
         data: {
-          text: ''
+          text: '',
+          committer: '',
+          nonecommitter: ''
           // ,
           // attachments: [
           //   {
@@ -98,6 +114,9 @@ export default {
         this.schedule.description = res.body.description
         this.schedule.hookType = res.body.hookType
         this.schedule.hookMenuType = res.body.hookMenuType
+        this.schedule.githubIds = res.body.githubIds
+        this.schedule.data.committer = res.body.data.committer
+        this.schedule.data.nonecommitter = res.body.data.nonecommitter
         this.schedule.image = res.body.image
         this.schedule.hookTime = res.body.hookTime
         this.schedule.hookTerm = res.body.hookTerm
