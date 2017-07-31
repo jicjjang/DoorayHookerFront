@@ -28,8 +28,17 @@ const mutations = {
 
 const actions = {
   initData: ({ commit }) => {
+    let tempData = {}
     Vue.http.get('data.json').then(res => {
-      commit('INIT_DATA', res.body)
+      if (res.body) {
+        const keys = Object.keys(res.body)
+        for (let i = 0; i < keys.length; i++) {
+          if (res.body[keys[i]].hookType !== 'dooray-weeklist') {
+            tempData[keys[i]] = res.body[keys[i]]
+          }
+        }
+        commit('INIT_DATA', tempData)
+      }
     })
   },
   saveData: ({ commit }, data) => {
