@@ -2,18 +2,25 @@ import Vue from 'vue'
 import { router } from '../../main'
 
 const state = {
+  id: 0,
   schedule: {}
 }
 
 const getters = {
-  scheduleList: () => {
+  scheduleList: (state, getters) => {
     return state.schedule
+  },
+  schedule: (state, getters) => {
+    return state.schedule[state.id]
   }
 }
 
 const mutations = {
   'INIT_DATA' (state, datas) {
     state.schedule = datas
+  },
+  'SET_ID' (state, data) {
+    state.id = data
   },
   'SAVE_DATA' (state, data) {
     if (!state.schedule) {
@@ -40,6 +47,9 @@ const actions = {
         commit('INIT_DATA', tempData)
       }
     })
+  },
+  setId: ({ commit }, id) => {
+    commit('SET_ID', id)
   },
   saveData: ({ commit }, data) => {
     Vue.http.post(`data.json`, data).then(res => {
