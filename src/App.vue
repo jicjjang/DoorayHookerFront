@@ -23,11 +23,13 @@ export default {
   },
   methods: {
     ...mapActions([
-      'initData'
+      'initData',
+      'initStatus'
     ])
   },
   created () {
     this.initData()
+    this.initStatus()
   }
 }
 </script>

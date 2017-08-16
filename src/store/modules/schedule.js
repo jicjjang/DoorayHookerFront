@@ -3,6 +3,7 @@ import { router } from '../../main'
 
 const state = {
   id: 0,
+  status: false,
   schedule: {}
 }
 
@@ -12,6 +13,9 @@ const getters = {
   },
   schedule: (state, getters) => {
     return state.schedule[state.id]
+  },
+  status: (state, getters) => {
+    return state.status
   }
 }
 
@@ -19,8 +23,11 @@ const mutations = {
   'INIT_DATA' (state, datas) {
     state.schedule = datas
   },
-  'SET_ID' (state, data) {
-    state.id = data
+  'SET_ID' (state, id) {
+    state.id = id
+  },
+  'SAVE_STATUS' (state, status) {
+    state.status = status
   },
   'SAVE_DATA' (state, data) {
     if (!state.schedule) {
@@ -50,6 +57,16 @@ const actions = {
   },
   setId: ({ commit }, id) => {
     commit('SET_ID', id)
+  },
+  initStatus: ({ commit }) => {
+    Vue.http.get(`data/status.json`).then(res => {
+      commit('SAVE_STATUS', res.body)
+    })
+  },
+  saveStatus: ({ commit }, status) => {
+    Vue.http.put(`data/status.json`, status).then(res => {
+      commit('SAVE_STATUS', res.body)
+    })
   },
   saveData: ({ commit }, data) => {
     Vue.http.post(`data.json`, data).then(res => {

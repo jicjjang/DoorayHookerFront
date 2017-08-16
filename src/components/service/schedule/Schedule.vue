@@ -2,7 +2,8 @@
   <li class="list-group-item"
       @mouseenter="isActive = true"
       @mouseleave="isActive = false"
-      :class="{ active: isActive }">
+      :class="{ active: isActive }"
+      v-if="index !== 'status'">
     <router-link :to="`/scheduler/${index}`" tag="div">
       <h4>Bot Description : {{ schedule.description }}</h4>
       <hr>
