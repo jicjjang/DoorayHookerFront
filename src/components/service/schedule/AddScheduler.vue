@@ -13,7 +13,7 @@
       <label for="hookType">Hook Type</label>
       <select v-model="schedule.hookType" class="form-control">
         <option value="dooray-message">Message</option>
-        <option value="dooray-culture">culture show information</option>
+        <option value="dooray-culture">Culture Show Information</option>
         <option value="dooray-menu">Menu</option>
         <option value="dooray-commit">Github Today Commit</option>
       </select>

@@ -6,6 +6,7 @@
     <h4>Image Url : '{{ this.schedule.image }}'</h4>
     <h4>Bot Name : '{{ this.schedule.name }}'</h4>
     <h4 v-if="this.schedule.hookType === 'dooray-message'">Bot Type : Message</h4>
+    <h4 v-else-if="this.schedule.hookType === 'dooray-culture'">Bot Type : Culture Show Information</h4>
     <h4 v-else-if="this.schedule.hookType === 'dooray-menu'">Bot Type : Menu - {{ this.schedule.hookMenuType }}</h4>
     <h4 v-else-if="this.schedule.hookType === 'dooray-commit'">Github Ids - {{ this.schedule.githubIds }}</h4>
     <h4 v-if="this.schedule.hookType === 'dooray-commit'">Message for Committer : {{ this.schedule.data.committer }}</h4>

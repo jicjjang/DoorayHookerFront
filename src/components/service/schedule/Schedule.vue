@@ -9,6 +9,7 @@
       <hr>
       <h4>Bot Name : '{{ schedule.name }}'</h4>
       <h4 v-if="schedule.hookType === 'dooray-message'">Type : Message</h4>
+      <h4 v-else-if="schedule.hookType === 'dooray-culture'">Type : Culture Show Information</h4>
       <h4 v-else-if="schedule.hookType === 'dooray-menu'">Type : Menu - {{ schedule.hookMenuType }}</h4>
       <h4 v-else-if="schedule.hookType === 'dooray-commit'">Type : Github Today Commit</h4>
       <h4>Time : {{ schedule.hookTime }}</h4>

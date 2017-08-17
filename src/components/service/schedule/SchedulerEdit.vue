@@ -3,50 +3,51 @@
     <h1>Edit Scheduler</h1>
     <div class="form-group">
       <label for="id">ID</label>
-      <input type="text" name="id" v-model="this.schedule.id"/>
+      <input type="text" name="id" v-model="scheduleData.id"/>
     </div>
     <div class="form-group">
       <label for="description">Description</label>
-      <input type="text" name="description" v-model="this.schedule.description"/>
+      <input type="text" name="description" v-model="scheduleData.description"/>
     </div>
     <div class="form-group">
       <label for="hookType">Hook Type</label>
-      <select v-model="this.schedule.hookType" class="form-control">
-        <option value="dooray-message" :selected="this.schedule.hookType === 'dooray-message'">Message</option>
-        <option value="dooray-menu" :selected="this.schedule.hookType === 'dooray-menu'">Menu</option>
-        <option value="dooray-commit" :selected="this.schedule.hookType === 'dooray-commit'">Github Today Commit</option>
+      <select v-model="scheduleData.hookType" class="form-control">
+        <option value="dooray-message" :selected="scheduleData.hookType === 'dooray-message'">Message</option>
+        <option value="dooray-culture" :selected="scheduleData.hookType === 'dooray-culture'">Culture Show Information</option>
+        <option value="dooray-menu" :selected="scheduleData.hookType === 'dooray-menu'">Menu</option>
+        <option value="dooray-commit" :selected="scheduleData.hookType === 'dooray-commit'">Github Today Commit</option>
       </select>
     </div>
-    <div class="form-group" v-if="this.schedule.hookType === 'dooray-menu'">
+    <div class="form-group" v-if="scheduleData.hookType === 'dooray-menu'">
       <label for="hookMenuType">Hook Menu Type</label>
-      <select v-model="this.schedule.hookMenuType" class="form-control">
+      <select v-model="scheduleData.hookMenuType" class="form-control">
         <option value="lunch">Lunch</option>
         <option value="dinner">Dinner</option>
       </select>
     </div>
-    <div class="form-group" v-if="this.schedule.hookType === 'dooray-commit'">
+    <div class="form-group" v-if="scheduleData.hookType === 'dooray-commit'">
       <label for="githubIds">Github Ids</label>
-      <input type="text" name="githubIds" v-model="this.schedule.githubIds" placeholder="jicjjang, godori, ..."/>
+      <input type="text" name="githubIds" v-model="scheduleData.githubIds" placeholder="jicjjang, godori, ..."/>
     </div>
-    <div class="form-group" v-if="this.schedule.hookType === 'dooray-commit'">
+    <div class="form-group" v-if="scheduleData.hookType === 'dooray-commit'">
       <label for="text">Message for committers</label>
-      <input type="text" name="text" v-model="this.schedule.data.committer" placeholder="Good job!">
+      <input type="text" name="text" v-model="scheduleData.data.committer" placeholder="Good job!">
     </div>
-    <div class="form-group" v-if="this.schedule.hookType === 'dooray-commit'">
+    <div class="form-group" v-if="scheduleData.hookType === 'dooray-commit'">
       <label for="text">Message for none committers</label>
-      <input type="text" name="text" v-model="this.schedule.data.nonecommitter" placeholder="cheer up...">
+      <input type="text" name="text" v-model="scheduleData.data.nonecommitter" placeholder="cheer up...">
     </div>
     <div class="form-group">
       <label for="imageUrl">Image Url</label>
-      <input type="text" name="imageUrl" v-model="this.schedule.image" placeholder="봇 이미지 url"/>
+      <input type="text" name="imageUrl" v-model="scheduleData.image" placeholder="봇 이미지 url"/>
     </div>
     <div class="form-group">
       <label for="hookTime">Hook Time</label>
-      <input type="text" name="hookTime" placeholder="09:00" v-model="this.schedule.hookTime"/>
+      <input type="text" name="hookTime" placeholder="09:00" v-model="scheduleData.hookTime"/>
     </div>
     <div class="form-group">
       <label for="hookTerm">Hook Term</label>
-      <select v-model="this.schedule.hookTerm" class="form-control">
+      <select v-model="scheduleData.hookTerm" class="form-control">
         <option value="0">없음</option>
         <option value="5">5분</option>
         <option value="10">10분</option>
@@ -57,11 +58,11 @@
     </div>
     <div class="form-group">
       <label for="name">Bot name</label>
-      <input type="text" name="name" v-model="this.schedule.name">
+      <input type="text" name="name" v-model="scheduleData.name">
     </div>
     <div class="form-group">
       <label for="text">Bot Text</label>
-      <input type="text" name="text" v-model="this.schedule.data.text">
+      <input type="text" name="text" v-model="scheduleData.data.text">
     </div>
     <hr>
     <div class="form-group">
@@ -72,13 +73,19 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
+  data () {
+    return {
+      scheduleData: null
+    }
+  },
   computed: {
-    ...mapGetters([
-      'schedule'
-    ])
+    schedule () {
+      this.scheduleData = this.$store.getters.schedule
+      return this.scheduleData
+    }
   },
   methods: {
     ...mapActions([
